@@ -89,7 +89,6 @@ class Login extends Component{
               placeholder="Password"
             />,
           )}
-                
             </Item>
             <Item>
               <Button type="primary" htmlType="submit" className="login-form-button">
@@ -104,5 +103,7 @@ class Login extends Component{
 }
 export default connect(
   state => ({}),
-  {saveUserInfo:createsaveUserInfoAction}
-)(Form.create()(Login)) ;
+  {
+    saveUserInfo:createsaveUserInfoAction
+  }
+)(Form.create()(Login))
