@@ -2708,6 +2708,13 @@ axe-core@^4.0.2:
   resolved "https://registry.nlark.com/axe-core/download/axe-core-4.2.0.tgz#6594db4ee62f78be79e32a7295d21b099b60668d"
   integrity sha1-ZZTbTuYveL554ypyldIbCZtgZo0=
 
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.npm.taobao.org/axios/download/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  integrity sha1-IlY0gZYvTWvemnbVFu8OXTwJsrg=
+  dependencies:
+    follow-redirects "^1.10.0"
+
 axobject-query@^2.2.0:
   version "2.2.0"
   resolved "https://registry.npm.taobao.org/axobject-query/download/axobject-query-2.2.0.tgz#943d47e10c0b704aa42275e20edf3722648989be"
@@ -5356,6 +5363,11 @@ follow-redirects@^1.0.0:
   version "1.14.0"
   resolved "https://registry.nlark.com/follow-redirects/download/follow-redirects-1.14.0.tgz?cache=0&sync_timestamp=1619369154979&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ffollow-redirects%2Fdownload%2Ffollow-redirects-1.14.0.tgz#f5d260f95c5f8c105894491feee5dc8993b402fe"
   integrity sha1-9dJg+VxfjBBYlEkf7uXciZO0Av4=
+
+follow-redirects@^1.10.0:
+  version "1.14.1"
+  resolved "https://registry.nlark.com/follow-redirects/download/follow-redirects-1.14.1.tgz?cache=0&sync_timestamp=1620555234886&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ffollow-redirects%2Fdownload%2Ffollow-redirects-1.14.1.tgz#d9114ded0a1cfdd334e164e6662ad02bfd91ff43"
+  integrity sha1-2RFN7Qoc/dM04WTmZirQK/2R/0M=
 
 for-in@^1.0.2:
   version "1.0.2"
@@ -8010,6 +8022,11 @@ npm-run-path@^4.0.0:
   integrity sha1-t+zR5e1T2o43pV4cImnguX7XSOo=
   dependencies:
     path-key "^3.0.0"
+
+nprogress@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npm.taobao.org/nprogress/download/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
+  integrity sha1-y480xTIT2JVyP8urkH6UIq28r7E=
 
 nth-check@^1.0.2:
   version "1.0.2"
