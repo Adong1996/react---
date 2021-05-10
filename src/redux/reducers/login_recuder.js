@@ -1,7 +1,7 @@
 import {SAVE_USER_INFO} from '../action_types.js'
 
 let initState = {
-  uer: {},
+  user: {},
   token: '',
   isLogin: false
 }
@@ -10,9 +10,9 @@ export default function test(preState=initState,action) {
   let newState
   switch (type) {
     case SAVE_USER_INFO:
-      newState = {user:data.user,token:data.token,isLogin:ture}
-     return newState;
+      newState = {user:data.user, token:data.token, isLogin:true}
+     return newState
     default:
-      return preState;
+      return preState
   }
 }
