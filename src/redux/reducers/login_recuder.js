@@ -1,9 +1,11 @@
 import {SAVE_USER_INFO} from '../action_types.js'
 
+let user = JSON.parse(localStorage.getItem('user'))
+let token = localStorage.getItem('token')
 let initState = {
-  user: {},
-  token: '',
-  isLogin: false
+  user: user || {},
+  token: token || '',
+  isLogin: user && token ? true : false
 }
 export default function test(preState=initState,action) {
   const {type,data} = action 

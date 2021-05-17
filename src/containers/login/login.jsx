@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import { Form,Input, Button, Icon, message } from 'antd';
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
 import {createsaveUserInfoAction} from '../../redux/action_creators/login_action.js'
 import {reqLogin} from '../../api'
@@ -23,10 +24,10 @@ class Login extends Component{
 
         }) */
         let result = await reqLogin(username, password)
-        console.log(result);
         let {status,msg,data} = result
         if(status === 0){
-          console.log(data);
+          //存入 redux 信息
+          this.props.saveUserInfo(data)
           //跳转admin
           this.props.history.replace('/admin')
         }else{
@@ -52,7 +53,11 @@ class Login extends Component{
 
   }
   render() {
-    const { getFieldDecorator } = this.props.form;  
+    const isLogin = this.props.isLogin
+    if (isLogin) {
+      return <Redirect to='/admin'/>
+    } else {
+      const { getFieldDecorator } = this.props.form;  
     return(
       <div className='login'>
         <header>
@@ -99,10 +104,14 @@ class Login extends Component{
         </section>
       </div>
     )
+    }
+    
   }
 }
 export default connect(
-  state => ({}),
+  state => ({
+    isLogin: state.userInfo.isLogin
+  }),
   {
     saveUserInfo:createsaveUserInfoAction
   }
