@@ -5,15 +5,24 @@ import qs from 'querystring'
 
 import 'nprogress/nprogress.css'
 
+import store from '../redux/store.js'
 const instance = axios.create({
   timeout: 5000,
 });
 
 //请求拦截器
 instance.interceptors.request.use(function (config) {
+  //进度条开始
   NProgress.start()
+  //从redux 保存 token 信息
+  const {token} = store.getState().userInfo
+  //向请求头中添加 token 用于校验身份
+  if(token) config.headers.Authorization = 'atguigu_' + token
+  //从配置中获取 method,data 
   let {method,data} = config
+  //若是 post 请求
   if(method.toLowerCase() === 'post'){
+    //若传递过来的参数是对象，转化成 urlencoded形式
     if(data instanceof Object){
       config.data = qs.stringify(data)
     }
@@ -24,8 +33,10 @@ instance.interceptors.request.use(function (config) {
 instance.interceptors.response.use(
   //成功拦截
   function (response) {
+    //进度条结束
     NProgress.done()
   return response.data;
+  
   //失败拦截
 }, function (error) {
   message.error(error.message,1)

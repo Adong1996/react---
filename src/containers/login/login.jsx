@@ -10,6 +10,15 @@ import './css/css.less'
 
 const {Item} = Form
 
+@connect(
+  state => ({
+    isLogin: state.userInfo.isLogin
+  }),
+  {
+    saveUserInfo:createsaveUserInfoAction
+  }
+)
+@Form.create()
 class Login extends Component{
   handleSubmit = (event) => {
     event.preventDefault();
@@ -108,11 +117,4 @@ class Login extends Component{
     
   }
 }
-export default connect(
-  state => ({
-    isLogin: state.userInfo.isLogin
-  }),
-  {
-    saveUserInfo:createsaveUserInfoAction
-  }
-)(Form.create()(Login))
+export default Login
