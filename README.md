@@ -81,33 +81,3 @@ withRouter（） 高阶组件
 6. promise 使用  
 要把异步回调函数里带回的值交给它外层方法的返回值
 回调地狱
-
-
-<Menu
-          defaultSelectedKeys={['/admin/home']}
-          defaultOpenKeys={['sub1']}
-          mode="inline"
-          theme="dark"
-          //inlineCollapsed={this.state.collapsed}
-        >
-          <Item key="/admin/home">
-            <Link to='/admin/home'>
-              <Icon type="desktop" />
-              <span>主页</span>
-            </Link>
-          </Item>
-          <SubMenu
-            key="sub1"
-            title={
-              <span>
-                <Icon type="mail" />
-                <span>商品</span>
-              </span>
-            }
-          >
-            <Item key="5">Option 5</Item>
-            <Item key="6">Option 6</Item>
-            <Item key="7">Option 7</Item>
-            <Item key="8">Option 8</Item>
-          </SubMenu>
-        </Menu>
