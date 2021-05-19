@@ -6,6 +6,7 @@ import qs from 'querystring'
 import 'nprogress/nprogress.css'
 
 import store from '../redux/store.js'
+import {createdeleteUserInfoAction} from '../redux/action_creators/login_action.js'
 const instance = axios.create({
   timeout: 5000,
 });
@@ -32,14 +33,22 @@ instance.interceptors.request.use(function (config) {
 //响应拦截器
 instance.interceptors.response.use(
   //成功拦截
-  function (response) {
+  (response) => {
     //进度条结束
     NProgress.done()
   return response.data;
   
   //失败拦截
-}, function (error) {
-  message.error(error.message,1)
+}, (error) => {
+  //进度条结束
+  NProgress.done()
+  console.log(error);
+  if(error.response.status === 401 ) {
+    store.dispatch(createdeleteUserInfoAction())
+    message.error('登录信息失效')
+  }else{
+    message.error(error.message,1)
+  }
   return new Promise(() => {});
 });
 

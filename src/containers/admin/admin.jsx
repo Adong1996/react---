@@ -1,12 +1,23 @@
 import React,{Component} from 'react'
-import {Redirect} from 'react-router-dom'
+import {Redirect,Route,Switch,} from 'react-router-dom'
 import {connect} from 'react-redux'
 import { Layout } from 'antd';
 
 import {createdeleteUserInfoAction} from '../../redux/action_creators/login_action.js'
-import {reqCategoryList} from '../../api/index.js'
 import Header from './header/header.jsx'
+import LetNav from './let_nav/let_nav.jsx'
 import './css/admin.less'
+
+import Home from '../../components/home/home.jsx'
+import Category from '../../containers/category/category'
+import Product from '../../containers/product/product'
+import User from '../../containers/user/user'
+import Role from '../../containers/role/role'
+import Bar from '../../containers/bar/bar'
+import Line from '../../containers/line/line'
+import Pie from '../../containers/pie/pie'
+
+
 
 const {Footer, Sider, Content } = Layout;
 
@@ -19,28 +30,39 @@ class Admin extends Component{
   }
   //退出登录回调
   logout = () => {
+    console.log("---");
     //触发 redux 删除所保留的用户信息
     this.props.deleteUserInfo()
   }
-  //接口测试
-  demo = async() => {
-    let result = await reqCategoryList()
-    console.log(result);
-  }
+  
   render() {
     //取出 redux 信息
     const { isLogin} = this.props.userInfo
     //判断是否登录
     if (!isLogin) return <Redirect to="/login" />
     else {
-      <button onClick={this.logout} >退出登录</button>
     return(
         <Layout className='admin'>
-          <Sider className='sider'>Sider</Sider>
+          <Sider className='sider'>
+            <LetNav/>
+          </Sider>
           <Layout>
             <Header/>
-            <Content className='conter'>Content</Content>
-            <Footer>Footer</Footer>
+            <Content className='conter'>
+              <Switch>
+                <Route path='/admin/home' component={Home} />
+                <Route path='/admin/prod_about/category' component={Category} />
+                <Route path='/admin/prod_about/product' component={Product} />
+                <Route path='/admin/user' component={User} />
+                <Route path='/admin/role' component={Role} />
+                <Route path='/admin/charts/bar' component={Bar} />
+                <Route path='/admin/charts/line' component={Line} />
+                <Route path='/admin/charts/pie' component={Pie} />
+                <Redirect to='/admin/home' />
+              </Switch>
+            </Content>
+            <Footer className='footer' >推荐使用谷歌浏览器，可以获得更佳的页面操作体验
+            </Footer>
           </Layout>
         </Layout>
     )}
