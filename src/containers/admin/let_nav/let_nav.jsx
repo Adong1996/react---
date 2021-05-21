@@ -1,19 +1,29 @@
 import React,{Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
 import { Menu, Icon } from 'antd';
+import {connect} from 'react-redux'
+import {createSaveTitleAction} from '../../../redux/action_creators/menu_action.js'
 import {menuList} from '../../../config/menu_config.js'
 import Logo from '../../../static/imgs/logo.png'
 import './let_nav.less'
 
 const { SubMenu,Item } = Menu;
+@connect(
+  state =>({}),
+  {
+    saveTitle:createSaveTitleAction
+  }
+)
+@withRouter
+class LetNav extends Component{
+  
 
-export default class LetNav extends Component{
-
+//创建菜单的函数
   createMenu = (target) => {
     return target.map((item)=>{
-      if (!item.children) {
+      if (!(item.children instanceof Array)) {
         return(
-          <Item key={item.key}>
+          <Item key={item.key} onClick={()=>(this.props.saveTitle(item.title))} >
             <Link to={item.path}>
               <Icon type={item.icon} />
               <span>{item.title}</span>
@@ -45,11 +55,10 @@ export default class LetNav extends Component{
           <h1>商品管理系统</h1>
         </header>
         <Menu
-          defaultSelectedKeys={['/admin/home']}
-          defaultOpenKeys={['sub1']}
+          selectedKeys={this.props.location.pathname.split('/').reverse()[0]}
+          defaultOpenKeys={this.props.location.pathname.split('/').slice(2)}
           mode="inline"
           theme="dark"
-          //inlineCollapsed={this.state.collapsed}
         >
           {this.createMenu(menuList)}
         </Menu>
@@ -57,3 +66,5 @@ export default class LetNav extends Component{
     )
   }
 }
+
+export default LetNav

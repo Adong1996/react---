@@ -5,8 +5,7 @@ import {BASE_URL, WEATHER_Ak, CTIY} from '../config/index.js'
 
 //登录请求
 export const reqLogin = (username,password) => myAios.post(`${BASE_URL}/login`,{username,password})
-//分类类表请求
-export const reqCategoryList = () => myAios.get(`${BASE_URL}/manage/category/list`)
+
 //百度天气接口请求(jsonp)
 export const reqWeather = () => {
   return new Promise((reslove)=>{
@@ -22,3 +21,11 @@ export const reqWeather = () => {
   })
   })
 }
+//分类列表请求
+export const reqCategoryList = () => myAios.get(`${BASE_URL}/manage/category/list`)
+//添加分类的请求
+export const reqAddCategory = ({categoryName}) => myAios.post(`${BASE_URL}/manage/category/add`,{categoryName})
+//更新分类的请求
+export const reqUndateCategory = ({categoryId,categoryName}) => myAios.post(`${BASE_URL}/manage/category/update`,{categoryId,categoryName})
+//获取商品列表
+export const reqProductList = (pageNum,pageSize) => myAios.get(`${BASE_URL}/manage/product/list`,{params:{pageNum,pageSize}})

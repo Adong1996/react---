@@ -22,6 +22,7 @@ const {Item} = Form
 class Login extends Component{
   handleSubmit = (event) => {
     event.preventDefault();
+    console.log(this.props.form.getFieldValue());
     this.props.form.validateFields(async(err, values) => {
       let {username, password} = values
       if (!err) {

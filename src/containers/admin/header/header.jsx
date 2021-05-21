@@ -6,13 +6,17 @@ import {withRouter} from 'react-router-dom'
 import dayjs from 'dayjs'
 
 import {createdeleteUserInfoAction} from '../../../redux/action_creators/login_action.js'
-import './header.less'  
 import { reqWeather } from '../../../api/index.js'
+import {menuList} from '../../../config/menu_config.js'
+import './header.less'  
+
 
 const { confirm } = Modal;
 
 @connect(
-  state => ({userInfo:state.userInfo}),
+  state => ({
+    userInfo:state.userInfo,
+    title:state.title}),
   {deleteUser:createdeleteUserInfoAction}
 )
 @withRouter
@@ -21,7 +25,8 @@ class Header extends Component {
   state = {
     isFull: false,
     //显示时间
-    data: dayjs().format('YYYY-MM-DD/HH:mm:ss-') 
+    data: dayjs().format('YYYY-MM-DD/HH:mm:ss-'),
+    title: ''
 
   }
   componentDidMount() {
@@ -35,8 +40,10 @@ class Header extends Component {
     }, 1000);
     //请求天气信息
   //  this.getWeater()
+    this.getTitle()
   }
-
+  componentDidUpdate(){
+  }
   componentWillUnmount(){
     //清除更新时间定时器
     clearInterval(this.timeID)
@@ -65,6 +72,23 @@ class Header extends Component {
   fullScreen = () => {
     screenfull.toggle()
   }
+
+  getTitle = () => {
+    let pathKey = this.props.location.pathname.split('/').reverse()[0]
+    let title = '';
+    menuList.forEach((item)=>{
+      if (item.children instanceof Array) {
+        let tem = item.children.find((citem)=>{
+          return citem.key === pathKey
+        })
+        if (tem) title = tem.title
+      }else{
+        if (pathKey === item.key) title = item.title
+      }
+    })
+    this.setState({title})
+  }
+
   render() {
     let {isFull, data} = this.state
     let {username} = this.props.userInfo.user
@@ -79,7 +103,7 @@ class Header extends Component {
         </div>
         <div className='header-bottom'>
           <div className='header-bottom-left'>
-            {this.props.location.pathname}
+            {this.props.title||this.state.title}
           </div>
           <div className='header-bottom-rigth'>
             {data}

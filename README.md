@@ -46,7 +46,7 @@ import {Link,NavLink} from 'react-router-dom'
 有样式添加用NavLink，无用Link
 <Link to=''>
   
-</Link>
+</Link>(不能直接加onClick(不能加小括号但需要传参则 ()=>{})的点击事件)
 (在antd中使用路由跳转而保持样式不塌陷则需)
 <Item>(antd组件)
   <Link to=''>
@@ -64,7 +64,12 @@ withRouter（） 高阶组件
     console.log(result);
   }
  
- 使用UI库  antd(组件库(样式无法从父级继承)) nprogress(进度条) querystring(json 转 urlencoded形式) screenfull(网页全屏) dayjs(时间) jsonp(解决跨域)
+ 使用UI库  
+ antd(v3)
+  (组件库(样式无法从父级继承)--设置默认选择的尽量不用选择带defalut,一般来说带有defalut...(只能设置一次)什么的就默认有个不带defalut...可以设置多次（但也有例外）) 
+  select onChange事件传的值是 value
+  input onChange事件传的值是 event.target.value
+ nprogress(进度条) querystring(json 转 urlencoded形式) screenfull(网页全屏) dayjs(时间) jsonp(解决跨域)
 
  5.跨域问题
   1.搭建代理服务器
@@ -81,3 +86,16 @@ withRouter（） 高阶组件
 6. promise 使用  
 要把异步回调函数里带回的值交给它外层方法的返回值
 回调地狱
+
+7.react生命周期函数
+
+
+8.分页
+  前端分页
+    一次性返回所有数据，有前端人员进行数据的切割，整理，划分页数
+    当数据量足够大时，会产生页面卡顿或浏览器‘假死’
+  后端分页
+    返回的是一部分数据，需要请求时指明：每页显示多少条，你要哪一页，交由服务器进行数据切割
+    后台需要明确； A:每页显示多少条 B:你要哪一页，同时后台会返回数据一共有多少个，用于交给前端显示
+
+9.受控组件(随着用户的输入，而维护状态) onChange 事件

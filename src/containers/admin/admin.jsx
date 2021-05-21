@@ -30,7 +30,6 @@ class Admin extends Component{
   }
   //退出登录回调
   logout = () => {
-    console.log("---");
     //触发 redux 删除所保留的用户信息
     this.props.deleteUserInfo()
   }

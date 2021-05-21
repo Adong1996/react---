@@ -7,3 +7,6 @@ export const WEATHER_Ak = '3p49MVra6urFRGOT9s8UBWr2';
 
 //城市名称
 export const CTIY = 'beijing';
+
+//分类列表展示页数
+export const PAGE_SIZE = 5;
