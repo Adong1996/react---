@@ -1,11 +1,16 @@
 import React,{Component} from 'react'
 import { Card,Button,Icon,Table,message,Modal,Input,Form } from 'antd';
+import {connect} from 'react-redux'
 
 import {reqCategoryList,reqAddCategory,reqUndateCategory} from '../../api/index.js'
 import {PAGE_SIZE} from '../../config/index'
+import {createsaveCategoryListAction} from '../../redux/action_creators/category_action'
 
 const {Item} = Form
-
+@connect(
+  state => ({}),
+  {saveCategoryList:createsaveCategoryListAction}
+)
 @Form.create()
 class Category extends Component {
  
@@ -26,7 +31,11 @@ class Category extends Component {
     let result = await reqCategoryList()
     this.setState({isLoading:false})
     const {status,data,msg} = result
-    if (status === 0) this.setState({category:data.reverse()})
+    if (status === 0) {
+      this.setState({category:data.reverse()})
+      //保存商品分类到redux
+      this.props.saveCategoryList(data)
+    }
     else message.error(msg)
   }
   //点击添加弹窗回调

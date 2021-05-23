@@ -29,3 +29,9 @@ export const reqAddCategory = ({categoryName}) => myAios.post(`${BASE_URL}/manag
 export const reqUndateCategory = ({categoryId,categoryName}) => myAios.post(`${BASE_URL}/manage/category/update`,{categoryId,categoryName})
 //获取商品列表
 export const reqProductList = (pageNum,pageSize) => myAios.get(`${BASE_URL}/manage/product/list`,{params:{pageNum,pageSize}})
+//更新商品状态的列表
+export const reqUpdateStatus = (_id,status) => myAios.post(`${BASE_URL}/manage/product/updateStatus`,{_id,status})
+//搜索商品列表
+export const reqSearchProduct = (pageNum,pageSize,searchType,keyWord) => myAios.get(`${BASE_URL}/manage/product/search`,{params:{pageNum,pageSize,[searchType]:keyWord}})
+//根据商品ID获取商品
+export const reqPorductId = (productId) => myAios.get(`${BASE_URL}/manage/product/info`,{params:{productId}})

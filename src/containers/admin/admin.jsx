@@ -11,6 +11,8 @@ import './css/admin.less'
 import Home from '../../components/home/home.jsx'
 import Category from '../../containers/category/category'
 import Product from '../../containers/product/product'
+import Detail from '../../containers/product/detail'
+import AddUpdate from '../../containers/product/add_update'
 import User from '../../containers/user/user'
 import Role from '../../containers/role/role'
 import Bar from '../../containers/bar/bar'
@@ -51,7 +53,10 @@ class Admin extends Component{
               <Switch>
                 <Route path='/admin/home' component={Home} />
                 <Route path='/admin/prod_about/category' component={Category} />
-                <Route path='/admin/prod_about/product' component={Product} />
+                <Route path='/admin/prod_about/product' component={Product} exact />
+                <Route path='/admin/prod_about/product/detail/:id' component={Detail} />
+                <Route path='/admin/prod_about/product/add_update' component={AddUpdate} exact />
+                <Route path='/admin/prod_about/product/add_update/:id' component={AddUpdate} />
                 <Route path='/admin/user' component={User} />
                 <Route path='/admin/role' component={Role} />
                 <Route path='/admin/charts/bar' component={Bar} />
