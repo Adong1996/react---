@@ -109,7 +109,7 @@ class Header extends Component {
           <div className='header-bottom-rigth'>
             {data}
             <img src="" alt="" />
-            晴 温度 2~5
+            天气接口是百度的，没有特定的key
           </div>
         </div>
       </header>

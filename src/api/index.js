@@ -35,3 +35,25 @@ export const reqUpdateStatus = (_id,status) => myAios.post(`${BASE_URL}/manage/p
 export const reqSearchProduct = (pageNum,pageSize,searchType,keyWord) => myAios.get(`${BASE_URL}/manage/product/search`,{params:{pageNum,pageSize,[searchType]:keyWord}})
 //根据商品ID获取商品
 export const reqPorductId = (productId) => myAios.get(`${BASE_URL}/manage/product/info`,{params:{productId}})
+//删除图片
+export const reqImgDelete = (name) => myAios.post(`${BASE_URL}/manage/img/delete`,{name})
+//添加商品
+export const reqPorductAdd = ({categoryList,name,desc,price,detail,imgs}) => myAios.post(`${BASE_URL}/manage/product/add`,{categoryId:categoryList,name,desc,price,detail,imgs})
+//更新商品
+export const reqPorductUpdate = ({_id,categoryId,name,desc,price,detail,imgs}) => myAios.post(`${BASE_URL}/manage/product/update`,{_id,categoryId,name,desc,price,detail,imgs})
+// 请求所有角色列表
+export const reqRoleList = () => myAios.get(`${BASE_URL}/manage/role/list`)
+//请求添加角色
+export const reqRoleAdd = (roleName) => myAios.post(`${BASE_URL}/manage/role/add`,{roleName})
+//给角色授权
+export const reqRoleUpdate = (roleObj) => myAios.post(`${BASE_URL}/manage/role/update`,{...roleObj,auth_time:Date.now()})
+//获取所有用户列表
+export const reqUserList = () => myAios.get(`${BASE_URL}/manage/user/list`)
+//请求添加用户
+export const reqAddUser = ({username,password,phone,email,role_id}) => myAios.post(`${BASE_URL}/manage/user/add`,{username,password,phone,email,role_id})
+//删除用户
+export const reqUserDelete = (userId) => myAios.post(`${BASE_URL}/manage/user/delete`,{userId})
+////用户修改
+export const reqUserUpdate = ({_id,username,phone,email,role_id}) => myAios.post(`${BASE_URL}/manage/user/update`,{_id,username,phone,email,role_id})
+
+

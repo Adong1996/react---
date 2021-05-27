@@ -79,7 +79,8 @@ withRouter（） 高阶组件
   (组件库(样式无法从父级继承)--设置默认选择的尽量不用选择带defalut,一般来说带有defalut...(只能设置一次)什么的就默认有个不带defalut...可以设置多次（但也有例外）) 
   select onChange事件传的值是 value
   input onChange事件传的值是 event.target.value
-  antd-upload 图片上传
+  图片上传
+  antd-upload 图片上传 默认上传方式 post
   
  nprogress(进度条) querystring(json 转 urlencoded形式) screenfull(网页全屏) dayjs(时间) jsonp(解决跨域)
 
@@ -100,10 +101,39 @@ withRouter（） 高阶组件
 回调地狱
 
 7.react生命周期函数
+（旧）
+初始化
+  触发条件：ReactDOM.render(<>)
+    constructor()
+    componentWillMount()
+    render():提供虚拟DOM，可能会调用多次（1+n）
+    componentDidMount():启动定时器，发送Ajax 请求，只执行一次
+更新
+  触发条件：this.setState({})
+    componentWillUpdate()
+    render()
+    componentDidUpdate()
+卸载
+  触发条件：ReactDOM.unmountComponentAtNode()
+    componentWillUnmount():收尾工作，例如：清除定时器，只执行一次
+
+（新）即将废弃的钩子 componentWillMount(),componenWillReceProps(),componentWillUpdate()
+
+getDervedStateFromProps()-- 取代了 componentWillMount(),componentWillUpdate()
+可接受参数而改变状态 
+static getDerivedStateFromProps(props,state){
+  return props
+}
+getSnapshotBeforeUpdate()--介于componentDidUpdate 和 render 之间
+
+
+inital render
 componentDidMount(){
   this.setState({a:100})
   console.log(this.state)//underful
 }
+
+
 this.setState(),是异步的，即：更新状态后，不会立即生效
 如果想立即调用可以为其添加一方法
 componentDidMount(){
@@ -114,6 +144,11 @@ componentDidMount(){
 但在老版本react中，只有在componentDidMount中this.setState(),是异步的,在自己定义的 deom = () => {} 中是同步的
 现版本中不管在哪this.setState(),都是异步的
 
+react -- 原理：
+初始化：
+创建虚拟DOM数（一般js对象）用于文档碎片技术 -> 映射出真实DOM 绘制界面显示
+更新界面
+
 8.分页
   前端分页
     一次性返回所有数据，有前端人员进行数据的切割，整理，划分页数
@@ -123,9 +158,30 @@ componentDidMount(){
     后台需要明确； A:每页显示多少条 B:你要哪一页，同时后台会返回数据一共有多少个，用于交给前端显示
 
 9.受控组件(随着用户的输入，而维护状态) onChange 事件
+(触发事件 就能得到其状态)
 
 10.绑定方法尽量不要动态的绑定
 
 11.存入详情信息数据的时候，里面带有标签时,使用 dangerouslySetInnerHTML={{__html:数据信息}}
 
-12.富文本   
+12.富文本编译器 --wysiwyg   
+
+13.react-redux 
+只能保存静态的状态
+14.
+当 子组件 的方法传递 父组件 用时
+可以 ref 标识
+this.refs.wall.(子组件的方法)--(this.refs.wall)类的实例
+<Item>
+  <Wall ref='wall'></Wall>(类组件)
+</item>
+
+14.jquery 库 ztree,easyUI
+
+15.数组扁平化？？
+
+16.array.some()
+
+17.数据可视化 
+echarts
+echarts-for-react
